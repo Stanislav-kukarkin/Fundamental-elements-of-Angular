@@ -1,0 +1,119 @@
+<p>xyz workszxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx!</p>
+
+<input type="text" [value]='title' (input)="onInput($event)">
+<!-- [] биндит(связывает) инпут из скрипта, делаем это для того что если есть что-то в строке 'title' -->
+<!-- () делает обратное действие, делает обратный вызов -->
+<!-- получается двустороняя связка -->
+
+<p>{{title}}</p>
+
+
+<!-- более правильный вариант -->
+<h1>Hello Angular World!</h1>
+
+<input type="text" [(ngModel)]="title">
+
+<p>{{title}}</p>
+
+<div class="d-flex">
+
+    <!-- ngStyle -->
+
+    <button (click)="backgroundToggle = !backgroundToggle">Toggle ngStyle</button>
+
+    <div [ngStyle]="{
+        width: '200px',
+        height: '200px',
+        borderRadius: '5px',
+        border: '1px solid #ccc',
+        background: backgroundToggle ? 'red' : 'blue'
+    }">ngStyle test
+    </div>
+
+    <!-- ngClass -->
+    <button (click)="backgroundToggle2 = !backgroundToggle2">Toggle ngClass</button>
+
+    <p [ngClass]='{
+        grey: backgroundToggle2,
+        orange: !backgroundToggle2
+    }'>ngClass test</p>
+
+    <!-- другой вариант -->
+
+    <button (click)="backgroundToggle3 = !backgroundToggle3">Toggle ngClass2s</button>
+
+    <p 
+        [class.grey]='!backgroundToggle3'
+        [class.orange]='backgroundToggle3'
+        >ngClass test 2
+    </p>
+
+    <!-- ngIf/else -->
+
+    <button (click)="toggle4 = !toggle4">Toggle ngIf</button>
+
+    <p *ngIf="toggle4" class="green">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, nostrum?</p>
+    <p *ngIf="!toggle4" class="pink">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda asperiores temporibus rerum quos laudantium excepturi voluptatum incidunt ullam maiores deserunt.</p>
+   
+   <!-- БОЛЕЕ правильный способ и быстрый -->
+   
+    <button (click)="toggle5 = !toggle5">Toggle ngIf/else</button>
+
+    <p *ngIf="toggle5; else blueP" class="green">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, nostrum?</p>
+ 
+    <ng-template #blueP>
+        <p  class="pink">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda asperiores temporibus rerum quos laudantium excepturi voluptatum incidunt ullam maiores deserunt.</p>
+    </ng-template>
+</div>
+
+<div class="d-flex">
+
+    <!-- ngSwitch -->
+
+    <button style="height: 100px;" (click)="toggle6 = !toggle6">Toggle ngSwitch</button>
+    <button style="height: 100px;" (click)="toggle6 = 111"> set1111</button>
+
+    <div [ngSwitch]="toggle6">
+        <p *ngSwitchCase="true" class="orange">Lorem, ipsum.</p>
+        <p *ngSwitchCase="false" class="pink">Lorem ipsum dolor sit.</p>
+        <p *ngSwitchDefault class="grey">Lorem ipsum dolor sit. olor sit</p>
+    </div>
+
+    <!-- ngFor -->
+
+    <ul>
+        <li *ngFor="let number of arr; let i = index">
+          {{i + 1}}  <strong>{{number}}</strong>
+        </li>
+    </ul>
+
+    <!-- more hard -->
+
+    <ul style="list-style: none;" class="d-flex">
+        <li *ngFor="let post of objs">
+          <p>{{post.title}} <br> <b>{{post.author}}</b></p>
+          <ul>
+              <li *ngFor="let comment of post.comments">
+                  <div>
+                      <small>{{comment.name}}</small>
+                      <p>{{comment.text}}</p>
+                  </div>
+              </li>
+          </ul>
+        </li>
+    </ul>
+
+    <!-- Pipes -->
+
+    <div>
+        <p>{{now}}</p>
+
+        <p>{{now | date}}</p>
+
+        <p>{{now | date: 'long'}}</p>
+
+        <p>{{now | date: 'long' | uppercase}}</p>
+    </div>
+
+
+</div>
